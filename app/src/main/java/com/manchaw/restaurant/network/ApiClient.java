@@ -18,6 +18,7 @@ public class ApiClient {
     public static final String URL_BASE = "https://developers.zomato.com/api/v2.1/";
 
     private static Retrofit retrofit;
+//    private static String user_key = "";
 
     public static Retrofit getClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

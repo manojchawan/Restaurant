@@ -7,7 +7,7 @@ import com.manchaw.restaurant.R;
 import com.manchaw.restaurant.model.SearchResponse;
 import com.manchaw.restaurant.network.ApiClient;
 import com.manchaw.restaurant.network.ApiInterface;
-import com.manchaw.restaurant.util.Util;
+import com.manchaw.restaurant.util.UtilKt;
 
 import androidx.lifecycle.MutableLiveData;
 import retrofit2.Call;
@@ -29,14 +29,14 @@ public class RestaurantRepository {
             @Override
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Util.INSTANCE.debugLog(TAG, "Response Success");
+                    UtilKt.debugLog(TAG, "Response Success");
                     responseMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<SearchResponse> call, Throwable t) {
-                Util.INSTANCE.debugLog(TAG, "error" + t.getLocalizedMessage());
+                UtilKt.debugLog(TAG, "error" + t.getLocalizedMessage());
             }
         });
 
