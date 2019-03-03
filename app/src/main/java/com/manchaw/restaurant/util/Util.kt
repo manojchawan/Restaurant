@@ -10,27 +10,23 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.manchaw.restaurant.BuildConfig
 
-object Util {
-
-    fun isConnected(mContext: Context?): Boolean {
-        if (mContext != null) {
-            val connectivityManager = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val info = connectivityManager.activeNetworkInfo
-            return info != null && info.isConnected
-        } else {
-            return false
-        }
+fun isConnected(mContext: Context?): Boolean {
+    if (mContext != null) {
+        val connectivityManager = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val info = connectivityManager.activeNetworkInfo
+        return info != null && info.isConnected
+    } else {
+        return false
     }
+}
 
-    fun debugLog(TAG: String, log: String) {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, log)
-        }
+fun debugLog(TAG: String, log: String) {
+    if (BuildConfig.DEBUG) {
+        Log.d(TAG, log)
     }
+}
 
-    fun showSnackbar(v: View, msg: String) {
-        Snackbar.make(v, msg, Snackbar.LENGTH_LONG).show()
-    }
-
+fun showSnackbar(v: View, msg: String) {
+    Snackbar.make(v, msg, Snackbar.LENGTH_LONG).show()
 }
 

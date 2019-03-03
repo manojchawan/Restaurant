@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.util.Util;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -37,7 +38,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.manchaw.restaurant.R;
 import com.manchaw.restaurant.model.NearbyRestaurant;
 import com.manchaw.restaurant.model.SearchResponse;
-import com.manchaw.restaurant.util.Util;
+import com.manchaw.restaurant.util.UtilKt;
 import com.manchaw.restaurant.viewModal.RestaurantViewModal;
 
 import java.util.ArrayList;
@@ -92,8 +93,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
 
     private void checkPermissions() {
-        if (Util.INSTANCE.isConnected(this)) {
-            Util.INSTANCE.debugLog(TAG, "internet available");
+        if (UtilKt.isConnected(this)) {
+            UtilKt.debugLog(TAG, "internet available");
 
             if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(MainActivity.this, new
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
             }
         } else
-            Util.INSTANCE.showSnackbar(root, "Please Connect to internet and click your location to fetch restaurants");
+            UtilKt.showSnackbar(root, "Please Connect to internet and click your location to fetch restaurants");
 
     }
 
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                                 }
                             });
                         } else
-                            Util.INSTANCE.showSnackbar(root, "Something went wrong while fetching location");
+                           UtilKt.showSnackbar(root, "Something went wrong while fetching location");
                     }
                 });
     }
@@ -161,12 +162,12 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     @Override
     public void onConnectionSuspended(int i) {
-        Util.INSTANCE.debugLog(TAG, "Connection Suspended");
+       UtilKt.debugLog(TAG, "Connection Suspended");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Util.INSTANCE.debugLog(TAG, "Connection failed: " + connectionResult.getErrorCode());
+        UtilKt.debugLog(TAG, "Connection failed: " + connectionResult.getErrorCode());
     }
 
     @Override
@@ -190,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         if (requestCode == REQUEST_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted.
-                Util.INSTANCE.debugLog(TAG, "PermissionsResult: Location Permission granted");
+                UtilKt.debugLog(TAG, "PermissionsResult: Location Permission granted");
                 getlocationData();
             } else {
                 Snackbar.make(root, "App needs access to Location", Snackbar.LENGTH_LONG)
