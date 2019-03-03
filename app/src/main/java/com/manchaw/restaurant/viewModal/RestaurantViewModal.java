@@ -21,9 +21,8 @@ public class RestaurantViewModal extends ViewModel {
 //        data = restaurantModel.getNearbyRestaurants(lat, lon);
 //    }
 
-    public MutableLiveData<SearchResponse> getRestaurants(double lat, double lon){
-        if(this.data == null)
-            data = restaurantModel.getNearbyRestaurants(lat, lon);
+    public MutableLiveData<SearchResponse> getRestaurants(double lat, double lon) {
+        data = restaurantModel.getNearbyRestaurants(lat, lon);
         return this.data;
     }
 }

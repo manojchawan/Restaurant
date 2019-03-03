@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     public static final String URL_BASE = "https://developers.zomato.com/api/v2.1/";
-
+    static String user_key = "4feaa2167c4dc6beadf629319423bd4b";
     private static Retrofit retrofit;
 
     public static Retrofit getClient() {
@@ -29,6 +29,7 @@ public class ApiClient {
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
+
                         Request request = chain.request().newBuilder().addHeader("user-key", user_key).build();
                         return chain.proceed(request);
                     }

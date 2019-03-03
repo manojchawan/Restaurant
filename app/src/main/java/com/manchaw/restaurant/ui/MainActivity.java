@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private ConstraintLayout root;
     private Toolbar toolbar;
     private TextView locationTitle;
+    private LottieAnimationView loading;
 
     private RestaurantViewModal mViewModel;
     private List<NearbyRestaurant> restaurantList = new ArrayList<>();
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         root = findViewById(R.id.rootLayout);
         locationTitle = findViewById(R.id.locationTitle);
+        loading = findViewById(R.id.loading);
 
         recyclerView = findViewById(R.id.nearbyRv);
         mAdapter = new NearbyAdapter(this, restaurantList);
@@ -107,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     @SuppressLint("MissingPermission")
     private void getlocationData() {
+        loading.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
         fusedLocationProviderClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -119,7 +124,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
                                 public void onChanged(SearchResponse searchResponse) {
                                     restaurantList.addAll(searchResponse.getNearbyRestaurants());
                                     locationTitle.setText(searchResponse.getLocation().getTitle());
+                                    recyclerView.setVisibility(View.VISIBLE);
                                     mAdapter.notifyDataSetChanged();
+                                    loading.setVisibility(View.GONE);
                                 }
                             });
                         } else
@@ -139,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_location:
+                locationTitle.setText("Detecting Location");
                 checkPermissions();
                 break;
         }

@@ -46,6 +46,9 @@ dependencies {
 
     //PLAY SERVICES
     implementation 'com.google.android.gms:play-services-location:16.0.0'
+
+    //Lottie
+    implementation 'com.airbnb.android:lottie:2.8.0'
 }
 repositories {
     mavenCentral()
