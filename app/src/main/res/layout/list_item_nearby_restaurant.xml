@@ -54,9 +54,10 @@
             android:id="@+id/cuisine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:layout_marginTop="4dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/name"
@@ -84,9 +85,9 @@
 
         <TextView
             android:id="@+id/avgCost"
-            android:layout_marginStart="24dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             app:layout_constraintBottom_toBottomOf="@id/star"
             app:layout_constraintStart_toEndOf="@id/rating" />
 

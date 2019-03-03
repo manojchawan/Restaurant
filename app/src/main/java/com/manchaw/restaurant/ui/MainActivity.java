@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_location:
-                locationTitle.setText("Detecting Location");
+                locationTitle.setText("Loading");
                 checkPermissions();
                 break;
         }
